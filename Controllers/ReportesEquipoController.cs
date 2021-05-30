@@ -107,6 +107,45 @@ namespace InventarioAPI.Controllers
             return Ok(lst);
 
         }
+        //Tipo, Ubicacion, precio, marca, codigo, fecha ingreso, departamento, cantidada
+        [HttpGet]
+        [Route("api/ReporteEquipoK/{tipo}/{Ubicacion}")]
+        public IHttpActionResult GetEquipoD(string tipo, string ubicacion)
+        {
+            List<data> l = new List<data>();
+
+            using (Models.inventario2e db = new Models.inventario2e())
+            {
+                try
+                {
+                    l = (
+                        from marcar in db.marcas
+                        join equipos in db.equipos on marcar.id_marca equals equipos.id_marca
+                        join modelos in db.modelos on equipos.id_modelo equals modelos.id_modelo
+                        join movimientos in db.movimientos_enquipos on
+                        equipos.id_equipo equals movimientos.id_equipo
+                        join encabezado in db.encabezado_movimientos on movimientos.id_encabezado equals encabezado.id_encabezado
+                        join departamentos in db.departamentos on movimientos.id_departamento equals departamentos.id_departamento
+
+                        where equipos.tipo_equipo == tipo && departamentos.departamento == ubicacion
+                        select new data
+                        {
+                            ID = movimientos.id_mov,
+                            Tipo = equipos.tipo_equipo,
+                            marca = marcar.marca,
+                            modelo = modelos.modelo,
+                            codigo = equipos.codigo,
+                            encabezado = encabezado.encabezado,
+                            Ubicacion = departamentos.departamento,
+                            Fecha = (DateTime)movimientos.fecha,
+                            Estado = (int)equipos.estado
+                        }).ToList();
+                }
+                catch (Exception e) { Console.WriteLine(e.ToString()); }
+            }
+            return Ok(l);
+        }
+
         /*
         [HttpGet]
         [Route("api/ReporteEquipo/")]
