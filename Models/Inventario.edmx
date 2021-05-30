@@ -1,0 +1,1492 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="inventario2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cargos">
+          <Key>
+            <PropertyRef Name="id_cargo" />
+          </Key>
+          <Property Name="id_cargo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cargo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="departamentos">
+          <Key>
+            <PropertyRef Name="id_departamento" />
+          </Key>
+          <Property Name="id_departamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="departamento" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="empleados">
+          <Key>
+            <PropertyRef Name="id_empleado" />
+          </Key>
+          <Property Name="id_empleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="apellido" Type="varchar" MaxLength="50" />
+          <Property Name="telefono" Type="varchar" MaxLength="10" />
+          <Property Name="direccion" Type="varchar" MaxLength="50" />
+          <Property Name="dui" Type="varchar" MaxLength="16" />
+          <Property Name="nit" Type="varchar" MaxLength="20" />
+          <Property Name="id_cargo" Type="int" />
+          <Property Name="estado" Type="int" />
+          <Property Name="id_departamento" Type="int" />
+        </EntityType>
+        <EntityType Name="encabezado_movimientos">
+          <Key>
+            <PropertyRef Name="id_encabezado" />
+          </Key>
+          <Property Name="id_encabezado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="encabezado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="equipos">
+          <Key>
+            <PropertyRef Name="id_equipo" />
+          </Key>
+          <Property Name="id_equipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_programacion" Type="int" />
+          <Property Name="id_marca" Type="int" />
+          <Property Name="id_modelo" Type="int" />
+          <Property Name="codigo" Type="varchar" MaxLength="50" />
+          <Property Name="precio_eq" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="fecha_cad" Type="date" />
+          <Property Name="tipo_equipo" Type="varchar" MaxLength="10" />
+          <Property Name="estado" Type="int" />
+          <Property Name="id_usuario" Type="int" />
+          <Property Name="fecha_modificacion" Type="date" />
+        </EntityType>
+        <EntityType Name="marcas">
+          <Key>
+            <PropertyRef Name="id_marca" />
+          </Key>
+          <Property Name="id_marca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="marca" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="modelos">
+          <Key>
+            <PropertyRef Name="id_modelo" />
+          </Key>
+          <Property Name="id_modelo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="modelo" Type="varchar" MaxLength="50" />
+          <Property Name="id_marca" Type="int" />
+        </EntityType>
+        <EntityType Name="movimientos_enquipos">
+          <Key>
+            <PropertyRef Name="id_mov" />
+          </Key>
+          <Property Name="id_mov" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_equipo" Type="int" />
+          <Property Name="id_empleado" Type="int" />
+          <Property Name="id_encabezado" Type="int" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="id_departamento" Type="int" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="id_usuario" Type="int" />
+          <Property Name="estado" Type="int" />
+        </EntityType>
+        <EntityType Name="programacion">
+          <Key>
+            <PropertyRef Name="id_programacion" />
+          </Key>
+          <Property Name="id_programacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="cant_equipos" Type="int" />
+          <Property Name="gestion" Type="varchar" MaxLength="50" />
+          <Property Name="id_usuario" Type="int" />
+          <Property Name="fecha_modificacion" Type="date" />
+          <Property Name="estado" Type="int" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_empleado" Type="int" />
+          <Property Name="correo" Type="varchar" MaxLength="50" />
+          <Property Name="clave" Type="varchar" MaxLength="20" />
+          <Property Name="tipo" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'inventario2.sys.database_firewall_rules' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="modify_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_cargos">
+          <End Role="cargos" Type="Self.cargos" Multiplicity="0..1" />
+          <End Role="empleados" Type="Self.empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargos">
+              <PropertyRef Name="id_cargo" />
+            </Principal>
+            <Dependent Role="empleados">
+              <PropertyRef Name="id_cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_depa">
+          <End Role="departamentos" Type="Self.departamentos" Multiplicity="0..1" />
+          <End Role="empleados" Type="Self.empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamentos">
+              <PropertyRef Name="id_departamento" />
+            </Principal>
+            <Dependent Role="empleados">
+              <PropertyRef Name="id_departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_departamento">
+          <End Role="departamentos" Type="Self.departamentos" Multiplicity="0..1" />
+          <End Role="movimientos_enquipos" Type="Self.movimientos_enquipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamentos">
+              <PropertyRef Name="id_departamento" />
+            </Principal>
+            <Dependent Role="movimientos_enquipos">
+              <PropertyRef Name="id_departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empleado">
+          <End Role="empleados" Type="Self.empleados" Multiplicity="0..1" />
+          <End Role="movimientos_enquipos" Type="Self.movimientos_enquipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empleados">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="movimientos_enquipos">
+              <PropertyRef Name="id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empleados">
+          <End Role="empleados" Type="Self.empleados" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empleados">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_encabezado_movimiento">
+          <End Role="encabezado_movimientos" Type="Self.encabezado_movimientos" Multiplicity="0..1" />
+          <End Role="movimientos_enquipos" Type="Self.movimientos_enquipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="encabezado_movimientos">
+              <PropertyRef Name="id_encabezado" />
+            </Principal>
+            <Dependent Role="movimientos_enquipos">
+              <PropertyRef Name="id_encabezado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipos">
+          <End Role="equipos" Type="Self.equipos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="movimientos_enquipos" Type="Self.movimientos_enquipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipos">
+              <PropertyRef Name="id_equipo" />
+            </Principal>
+            <Dependent Role="movimientos_enquipos">
+              <PropertyRef Name="id_equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_marca">
+          <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+          <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marcas">
+              <PropertyRef Name="id_marca" />
+            </Principal>
+            <Dependent Role="equipos">
+              <PropertyRef Name="id_marca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_marcas">
+          <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+          <End Role="modelos" Type="Self.modelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marcas">
+              <PropertyRef Name="id_marca" />
+            </Principal>
+            <Dependent Role="modelos">
+              <PropertyRef Name="id_marca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_modelos">
+          <End Role="modelos" Type="Self.modelos" Multiplicity="0..1" />
+          <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="modelos">
+              <PropertyRef Name="id_modelo" />
+            </Principal>
+            <Dependent Role="equipos">
+              <PropertyRef Name="id_modelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_programacion">
+          <End Role="programacion" Type="Self.programacion" Multiplicity="0..1" />
+          <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programacion">
+              <PropertyRef Name="id_programacion" />
+            </Principal>
+            <Dependent Role="equipos">
+              <PropertyRef Name="id_programacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario1">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="0..1" />
+          <End Role="movimientos_enquipos" Type="Self.movimientos_enquipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="movimientos_enquipos">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuarios2">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="0..1" />
+          <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="equipos">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuarios3">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="0..1" />
+          <End Role="programacion" Type="Self.programacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="programacion">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="editar_empleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idempleado" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="apellido" Type="varchar" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+          <Parameter Name="direccion" Type="varchar" Mode="In" />
+          <Parameter Name="dui" Type="varchar" Mode="In" />
+          <Parameter Name="nit" Type="varchar" Mode="In" />
+          <Parameter Name="id_cargo" Type="int" Mode="In" />
+          <Parameter Name="estado" Type="int" Mode="In" />
+          <Parameter Name="id_departamento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="editar_equipos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idequipo" Type="int" Mode="In" />
+          <Parameter Name="idprogramacion" Type="int" Mode="In" />
+          <Parameter Name="idmarca" Type="int" Mode="In" />
+          <Parameter Name="idmodelo" Type="int" Mode="In" />
+          <Parameter Name="codigo" Type="varchar" Mode="In" />
+          <Parameter Name="precio" Type="decimal" Mode="In" />
+          <Parameter Name="fecha_cad" Type="date" Mode="In" />
+          <Parameter Name="tipo_equipo" Type="varchar" Mode="In" />
+          <Parameter Name="estado" Type="int" Mode="In" />
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+          <Parameter Name="fecha_modificacion" Type="date" Mode="In" />
+        </Function>
+        <Function Name="sp_AsignarEquipos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_equipo" Type="int" Mode="In" />
+          <Parameter Name="id_empleado" Type="int" Mode="In" />
+          <Parameter Name="id_encabezado" Type="int" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="id_departamento" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="datetime" Mode="In" />
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+          <Parameter Name="estado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_BuscarEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="textobuscar" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_equipos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_RecepcionMov" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idmov" Type="int" Mode="In" />
+          <Parameter Name="ideq" Type="int" Mode="In" />
+          <Parameter Name="idemp" Type="int" Mode="In" />
+          <Parameter Name="idenc" Type="int" Mode="In" />
+          <Parameter Name="descrip" Type="varchar" Mode="In" />
+          <Parameter Name="iddep" Type="int" Mode="In" />
+          <Parameter Name="fech" Type="datetime" Mode="In" />
+          <Parameter Name="idus" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_RecepcionMov2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idmov" Type="int" Mode="In" />
+          <Parameter Name="ideq" Type="int" Mode="In" />
+          <Parameter Name="idemp" Type="int" Mode="In" />
+          <Parameter Name="idenc" Type="int" Mode="In" />
+          <Parameter Name="descrip" Type="varchar" Mode="In" />
+          <Parameter Name="iddep" Type="int" Mode="In" />
+          <Parameter Name="fech" Type="datetime" Mode="In" />
+          <Parameter Name="idus" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_reportEquipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="varchar" Mode="In" />
+          <Parameter Name="id_marca" Type="int" Mode="In" />
+          <Parameter Name="id_modelo" Type="int" Mode="In" />
+          <Parameter Name="fecha_ini" Type="date" Mode="In" />
+          <Parameter Name="fecha_fin" Type="date" Mode="In" />
+          <Parameter Name="departamento" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_reportProgra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="varchar" Mode="In" />
+          <Parameter Name="marca" Type="varchar" Mode="In" />
+          <Parameter Name="fecha_ini" Type="date" Mode="In" />
+          <Parameter Name="fecha_fin" Type="date" Mode="In" />
+          <Parameter Name="departamento" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spbuscar_empleado_nombre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="textobuscar" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spbuscar_equipo_tipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="textobuscar" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="speliminar_empleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idempleado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="speliminar_equipos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idequipo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spequipo_tipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spinsertar_empleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idempleado" Type="int" Mode="InOut" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="apellido" Type="varchar" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+          <Parameter Name="direccion" Type="varchar" Mode="In" />
+          <Parameter Name="dui" Type="varchar" Mode="In" />
+          <Parameter Name="nit" Type="varchar" Mode="In" />
+          <Parameter Name="id_cargo" Type="int" Mode="In" />
+          <Parameter Name="estado" Type="int" Mode="In" />
+          <Parameter Name="id_departamento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spinsertar_equipos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idequipo" Type="int" Mode="InOut" />
+          <Parameter Name="idprogramacion" Type="int" Mode="In" />
+          <Parameter Name="idmarca" Type="int" Mode="In" />
+          <Parameter Name="idmodelo" Type="int" Mode="In" />
+          <Parameter Name="codigo" Type="varchar" Mode="In" />
+          <Parameter Name="precio" Type="decimal" Mode="In" />
+          <Parameter Name="fecha_cad" Type="date" Mode="In" />
+          <Parameter Name="tipo_equipo" Type="varchar" Mode="In" />
+          <Parameter Name="estado" Type="int" Mode="In" />
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+          <Parameter Name="fecha_modificacion" Type="date" Mode="In" />
+        </Function>
+        <Function Name="spllenado_equipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spllenar_encMovimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spllenar_MostEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="splogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="correo" Type="varchar" Mode="In" />
+          <Parameter Name="clave" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spmostrar_cargos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spmostrar_departamentos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spmostrar_empleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spmostrar_marcas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spmostrar_modelos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spmostrar_modeloscb" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_marcas" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="inventario2StoreContainer">
+          <EntitySet Name="cargos" EntityType="Self.cargos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="departamentos" EntityType="Self.departamentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="empleados" EntityType="Self.empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="encabezado_movimientos" EntityType="Self.encabezado_movimientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="equipos" EntityType="Self.equipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="marcas" EntityType="Self.marcas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="modelos" EntityType="Self.modelos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="movimientos_enquipos" EntityType="Self.movimientos_enquipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="programacion" EntityType="Self.programacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+            <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="fk_cargos" Association="Self.fk_cargos">
+            <End Role="cargos" EntitySet="cargos" />
+            <End Role="empleados" EntitySet="empleados" />
+          </AssociationSet>
+          <AssociationSet Name="fk_depa" Association="Self.fk_depa">
+            <End Role="departamentos" EntitySet="departamentos" />
+            <End Role="empleados" EntitySet="empleados" />
+          </AssociationSet>
+          <AssociationSet Name="fk_departamento" Association="Self.fk_departamento">
+            <End Role="departamentos" EntitySet="departamentos" />
+            <End Role="movimientos_enquipos" EntitySet="movimientos_enquipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empleado" Association="Self.fk_empleado">
+            <End Role="empleados" EntitySet="empleados" />
+            <End Role="movimientos_enquipos" EntitySet="movimientos_enquipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empleados" Association="Self.fk_empleados">
+            <End Role="empleados" EntitySet="empleados" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_encabezado_movimiento" Association="Self.fk_encabezado_movimiento">
+            <End Role="encabezado_movimientos" EntitySet="encabezado_movimientos" />
+            <End Role="movimientos_enquipos" EntitySet="movimientos_enquipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipos" Association="Self.fk_equipos">
+            <End Role="equipos" EntitySet="equipos" />
+            <End Role="movimientos_enquipos" EntitySet="movimientos_enquipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_marca" Association="Self.fk_marca">
+            <End Role="marcas" EntitySet="marcas" />
+            <End Role="equipos" EntitySet="equipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_marcas" Association="Self.fk_marcas">
+            <End Role="marcas" EntitySet="marcas" />
+            <End Role="modelos" EntitySet="modelos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_modelos" Association="Self.fk_modelos">
+            <End Role="modelos" EntitySet="modelos" />
+            <End Role="equipos" EntitySet="equipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_programacion" Association="Self.fk_programacion">
+            <End Role="programacion" EntitySet="programacion" />
+            <End Role="equipos" EntitySet="equipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario1" Association="Self.fk_usuario1">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="movimientos_enquipos" EntitySet="movimientos_enquipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuarios2" Association="Self.fk_usuarios2">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="equipos" EntitySet="equipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuarios3" Association="Self.fk_usuarios3">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="programacion" EntitySet="programacion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="inventario2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cargos">
+          <Key>
+            <PropertyRef Name="id_cargo" />
+          </Key>
+          <Property Name="id_cargo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cargo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="empleados" Relationship="Self.fk_cargos" FromRole="cargos" ToRole="empleados" />
+        </EntityType>
+        <EntityType Name="departamentos">
+          <Key>
+            <PropertyRef Name="id_departamento" />
+          </Key>
+          <Property Name="id_departamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="empleados" Relationship="Self.fk_depa" FromRole="departamentos" ToRole="empleados" />
+          <NavigationProperty Name="movimientos_enquipos" Relationship="Self.fk_departamento" FromRole="departamentos" ToRole="movimientos_enquipos" />
+        </EntityType>
+        <EntityType Name="empleados">
+          <Key>
+            <PropertyRef Name="id_empleado" />
+          </Key>
+          <Property Name="id_empleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dui" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="nit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="id_cargo" Type="Int32" />
+          <Property Name="estado" Type="Int32" />
+          <Property Name="id_departamento" Type="Int32" />
+          <NavigationProperty Name="cargos" Relationship="Self.fk_cargos" FromRole="empleados" ToRole="cargos" />
+          <NavigationProperty Name="departamentos" Relationship="Self.fk_depa" FromRole="empleados" ToRole="departamentos" />
+          <NavigationProperty Name="movimientos_enquipos" Relationship="Self.fk_empleado" FromRole="empleados" ToRole="movimientos_enquipos" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_empleados" FromRole="empleados" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="encabezado_movimientos">
+          <Key>
+            <PropertyRef Name="id_encabezado" />
+          </Key>
+          <Property Name="id_encabezado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="encabezado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="movimientos_enquipos" Relationship="Self.fk_encabezado_movimiento" FromRole="encabezado_movimientos" ToRole="movimientos_enquipos" />
+        </EntityType>
+        <EntityType Name="equipos">
+          <Key>
+            <PropertyRef Name="id_equipo" />
+          </Key>
+          <Property Name="id_equipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_programacion" Type="Int32" />
+          <Property Name="id_marca" Type="Int32" />
+          <Property Name="id_modelo" Type="Int32" />
+          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="precio_eq" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="fecha_cad" Type="DateTime" Precision="0" />
+          <Property Name="tipo_equipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Int32" />
+          <Property Name="id_usuario" Type="Int32" />
+          <Property Name="fecha_modificacion" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="movimientos_enquipos" Relationship="Self.fk_equipos" FromRole="equipos" ToRole="movimientos_enquipos" />
+          <NavigationProperty Name="marcas" Relationship="Self.fk_marca" FromRole="equipos" ToRole="marcas" />
+          <NavigationProperty Name="modelos" Relationship="Self.fk_modelos" FromRole="equipos" ToRole="modelos" />
+          <NavigationProperty Name="programacion" Relationship="Self.fk_programacion" FromRole="equipos" ToRole="programacion" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_usuarios2" FromRole="equipos" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="marcas">
+          <Key>
+            <PropertyRef Name="id_marca" />
+          </Key>
+          <Property Name="id_marca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="equipos" Relationship="Self.fk_marca" FromRole="marcas" ToRole="equipos" />
+          <NavigationProperty Name="modelos" Relationship="Self.fk_marcas" FromRole="marcas" ToRole="modelos" />
+        </EntityType>
+        <EntityType Name="modelos">
+          <Key>
+            <PropertyRef Name="id_modelo" />
+          </Key>
+          <Property Name="id_modelo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_marca" Type="Int32" />
+          <NavigationProperty Name="equipos" Relationship="Self.fk_modelos" FromRole="modelos" ToRole="equipos" />
+          <NavigationProperty Name="marcas" Relationship="Self.fk_marcas" FromRole="modelos" ToRole="marcas" />
+        </EntityType>
+        <EntityType Name="movimientos_enquipos">
+          <Key>
+            <PropertyRef Name="id_mov" />
+          </Key>
+          <Property Name="id_mov" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_equipo" Type="Int32" />
+          <Property Name="id_empleado" Type="Int32" />
+          <Property Name="id_encabezado" Type="Int32" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_departamento" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="id_usuario" Type="Int32" />
+          <Property Name="estado" Type="Int32" />
+          <NavigationProperty Name="departamentos" Relationship="Self.fk_departamento" FromRole="movimientos_enquipos" ToRole="departamentos" />
+          <NavigationProperty Name="empleados" Relationship="Self.fk_empleado" FromRole="movimientos_enquipos" ToRole="empleados" />
+          <NavigationProperty Name="encabezado_movimientos" Relationship="Self.fk_encabezado_movimiento" FromRole="movimientos_enquipos" ToRole="encabezado_movimientos" />
+          <NavigationProperty Name="equipos" Relationship="Self.fk_equipos" FromRole="movimientos_enquipos" ToRole="equipos" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_usuario1" FromRole="movimientos_enquipos" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="programacion">
+          <Key>
+            <PropertyRef Name="id_programacion" />
+          </Key>
+          <Property Name="id_programacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="cant_equipos" Type="Int32" />
+          <Property Name="gestion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_usuario" Type="Int32" />
+          <Property Name="fecha_modificacion" Type="DateTime" Precision="0" />
+          <Property Name="estado" Type="Int32" />
+          <NavigationProperty Name="equipos" Relationship="Self.fk_programacion" FromRole="programacion" ToRole="equipos" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_usuarios3" FromRole="programacion" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_empleado" Type="Int32" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="clave" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tipo" Type="Int32" />
+          <NavigationProperty Name="empleados" Relationship="Self.fk_empleados" FromRole="usuarios" ToRole="empleados" />
+          <NavigationProperty Name="equipos" Relationship="Self.fk_usuarios2" FromRole="usuarios" ToRole="equipos" />
+          <NavigationProperty Name="movimientos_enquipos" Relationship="Self.fk_usuario1" FromRole="usuarios" ToRole="movimientos_enquipos" />
+          <NavigationProperty Name="programacion" Relationship="Self.fk_usuarios3" FromRole="usuarios" ToRole="programacion" />
+        </EntityType>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="fk_cargos">
+          <End Role="cargos" Type="Self.cargos" Multiplicity="0..1" />
+          <End Role="empleados" Type="Self.empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargos">
+              <PropertyRef Name="id_cargo" />
+            </Principal>
+            <Dependent Role="empleados">
+              <PropertyRef Name="id_cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_depa">
+          <End Role="departamentos" Type="Self.departamentos" Multiplicity="0..1" />
+          <End Role="empleados" Type="Self.empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamentos">
+              <PropertyRef Name="id_departamento" />
+            </Principal>
+            <Dependent Role="empleados">
+              <PropertyRef Name="id_departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_departamento">
+          <End Role="departamentos" Type="Self.departamentos" Multiplicity="0..1" />
+          <End Role="movimientos_enquipos" Type="Self.movimientos_enquipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamentos">
+              <PropertyRef Name="id_departamento" />
+            </Principal>
+            <Dependent Role="movimientos_enquipos">
+              <PropertyRef Name="id_departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empleado">
+          <End Role="empleados" Type="Self.empleados" Multiplicity="0..1" />
+          <End Role="movimientos_enquipos" Type="Self.movimientos_enquipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empleados">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="movimientos_enquipos">
+              <PropertyRef Name="id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empleados">
+          <End Role="empleados" Type="Self.empleados" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empleados">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_encabezado_movimiento">
+          <End Role="encabezado_movimientos" Type="Self.encabezado_movimientos" Multiplicity="0..1" />
+          <End Role="movimientos_enquipos" Type="Self.movimientos_enquipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="encabezado_movimientos">
+              <PropertyRef Name="id_encabezado" />
+            </Principal>
+            <Dependent Role="movimientos_enquipos">
+              <PropertyRef Name="id_encabezado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_equipos">
+          <End Role="equipos" Type="Self.equipos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="movimientos_enquipos" Type="Self.movimientos_enquipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipos">
+              <PropertyRef Name="id_equipo" />
+            </Principal>
+            <Dependent Role="movimientos_enquipos">
+              <PropertyRef Name="id_equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_marca">
+          <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+          <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marcas">
+              <PropertyRef Name="id_marca" />
+            </Principal>
+            <Dependent Role="equipos">
+              <PropertyRef Name="id_marca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_modelos">
+          <End Role="modelos" Type="Self.modelos" Multiplicity="0..1" />
+          <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="modelos">
+              <PropertyRef Name="id_modelo" />
+            </Principal>
+            <Dependent Role="equipos">
+              <PropertyRef Name="id_modelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_programacion">
+          <End Role="programacion" Type="Self.programacion" Multiplicity="0..1" />
+          <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programacion">
+              <PropertyRef Name="id_programacion" />
+            </Principal>
+            <Dependent Role="equipos">
+              <PropertyRef Name="id_programacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuarios2">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="0..1" />
+          <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="equipos">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_marcas">
+          <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+          <End Role="modelos" Type="Self.modelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marcas">
+              <PropertyRef Name="id_marca" />
+            </Principal>
+            <Dependent Role="modelos">
+              <PropertyRef Name="id_marca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario1">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="0..1" />
+          <End Role="movimientos_enquipos" Type="Self.movimientos_enquipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="movimientos_enquipos">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuarios3">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="0..1" />
+          <End Role="programacion" Type="Self.programacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="programacion">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="inventario2e" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cargos" EntityType="Self.cargos" />
+          <EntitySet Name="departamentos" EntityType="Self.departamentos" />
+          <EntitySet Name="empleados" EntityType="Self.empleados" />
+          <EntitySet Name="encabezado_movimientos" EntityType="Self.encabezado_movimientos" />
+          <EntitySet Name="equipos" EntityType="Self.equipos" />
+          <EntitySet Name="marcas" EntityType="Self.marcas" />
+          <EntitySet Name="modelos" EntityType="Self.modelos" />
+          <EntitySet Name="movimientos_enquipos" EntityType="Self.movimientos_enquipos" />
+          <EntitySet Name="programacion" EntityType="Self.programacion" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
+          <AssociationSet Name="fk_cargos" Association="Self.fk_cargos">
+            <End Role="cargos" EntitySet="cargos" />
+            <End Role="empleados" EntitySet="empleados" />
+          </AssociationSet>
+          <AssociationSet Name="fk_depa" Association="Self.fk_depa">
+            <End Role="departamentos" EntitySet="departamentos" />
+            <End Role="empleados" EntitySet="empleados" />
+          </AssociationSet>
+          <AssociationSet Name="fk_departamento" Association="Self.fk_departamento">
+            <End Role="departamentos" EntitySet="departamentos" />
+            <End Role="movimientos_enquipos" EntitySet="movimientos_enquipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empleado" Association="Self.fk_empleado">
+            <End Role="empleados" EntitySet="empleados" />
+            <End Role="movimientos_enquipos" EntitySet="movimientos_enquipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empleados" Association="Self.fk_empleados">
+            <End Role="empleados" EntitySet="empleados" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_encabezado_movimiento" Association="Self.fk_encabezado_movimiento">
+            <End Role="encabezado_movimientos" EntitySet="encabezado_movimientos" />
+            <End Role="movimientos_enquipos" EntitySet="movimientos_enquipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_equipos" Association="Self.fk_equipos">
+            <End Role="equipos" EntitySet="equipos" />
+            <End Role="movimientos_enquipos" EntitySet="movimientos_enquipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_marca" Association="Self.fk_marca">
+            <End Role="marcas" EntitySet="marcas" />
+            <End Role="equipos" EntitySet="equipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_modelos" Association="Self.fk_modelos">
+            <End Role="modelos" EntitySet="modelos" />
+            <End Role="equipos" EntitySet="equipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_programacion" Association="Self.fk_programacion">
+            <End Role="programacion" EntitySet="programacion" />
+            <End Role="equipos" EntitySet="equipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuarios2" Association="Self.fk_usuarios2">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="equipos" EntitySet="equipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_marcas" Association="Self.fk_marcas">
+            <End Role="marcas" EntitySet="marcas" />
+            <End Role="modelos" EntitySet="modelos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario1" Association="Self.fk_usuario1">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="movimientos_enquipos" EntitySet="movimientos_enquipos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuarios3" Association="Self.fk_usuarios3">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="programacion" EntitySet="programacion" />
+          </AssociationSet>
+          <FunctionImport Name="editar_empleado">
+            <Parameter Name="idempleado" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="apellido" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="direccion" Mode="In" Type="String" />
+            <Parameter Name="dui" Mode="In" Type="String" />
+            <Parameter Name="nit" Mode="In" Type="String" />
+            <Parameter Name="id_cargo" Mode="In" Type="Int32" />
+            <Parameter Name="estado" Mode="In" Type="Int32" />
+            <Parameter Name="id_departamento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="editar_equipos">
+            <Parameter Name="idequipo" Mode="In" Type="Int32" />
+            <Parameter Name="idprogramacion" Mode="In" Type="Int32" />
+            <Parameter Name="idmarca" Mode="In" Type="Int32" />
+            <Parameter Name="idmodelo" Mode="In" Type="Int32" />
+            <Parameter Name="codigo" Mode="In" Type="String" />
+            <Parameter Name="precio" Mode="In" Type="Decimal" />
+            <Parameter Name="fecha_cad" Mode="In" Type="DateTime" />
+            <Parameter Name="tipo_equipo" Mode="In" Type="String" />
+            <Parameter Name="estado" Mode="In" Type="Int32" />
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+            <Parameter Name="fecha_modificacion" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_AsignarEquipos">
+            <Parameter Name="id_equipo" Mode="In" Type="Int32" />
+            <Parameter Name="id_empleado" Mode="In" Type="Int32" />
+            <Parameter Name="id_encabezado" Mode="In" Type="Int32" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="id_departamento" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+            <Parameter Name="estado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_BuscarEmpleado" ReturnType="Collection(inventario2.sp_BuscarEmpleado_Result)">
+            <Parameter Name="textobuscar" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_equipos" ReturnType="Collection(inventario2.sp_mostrar_equipos_Result)" />
+          <FunctionImport Name="sp_RecepcionMov">
+            <Parameter Name="idmov" Mode="In" Type="Int32" />
+            <Parameter Name="ideq" Mode="In" Type="Int32" />
+            <Parameter Name="idemp" Mode="In" Type="Int32" />
+            <Parameter Name="idenc" Mode="In" Type="Int32" />
+            <Parameter Name="descrip" Mode="In" Type="String" />
+            <Parameter Name="iddep" Mode="In" Type="Int32" />
+            <Parameter Name="fech" Mode="In" Type="DateTime" />
+            <Parameter Name="idus" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_RecepcionMov2">
+            <Parameter Name="idmov" Mode="In" Type="Int32" />
+            <Parameter Name="ideq" Mode="In" Type="Int32" />
+            <Parameter Name="idemp" Mode="In" Type="Int32" />
+            <Parameter Name="idenc" Mode="In" Type="Int32" />
+            <Parameter Name="descrip" Mode="In" Type="String" />
+            <Parameter Name="iddep" Mode="In" Type="Int32" />
+            <Parameter Name="fech" Mode="In" Type="DateTime" />
+            <Parameter Name="idus" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_reportEquipo" ReturnType="Collection(inventario2.sp_reportEquipo_Result)">
+            <Parameter Name="tipo" Mode="In" Type="String" />
+            <Parameter Name="id_marca" Mode="In" Type="Int32" />
+            <Parameter Name="id_modelo" Mode="In" Type="Int32" />
+            <Parameter Name="fecha_ini" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
+            <Parameter Name="departamento" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_reportProgra" ReturnType="Collection(inventario2.sp_reportProgra_Result)">
+            <Parameter Name="tipo" Mode="In" Type="String" />
+            <Parameter Name="marca" Mode="In" Type="String" />
+            <Parameter Name="fecha_ini" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
+            <Parameter Name="departamento" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spbuscar_empleado_nombre" ReturnType="Collection(inventario2.spbuscar_empleado_nombre_Result)">
+            <Parameter Name="textobuscar" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spbuscar_equipo_tipo" ReturnType="Collection(inventario2.spbuscar_equipo_tipo_Result)">
+            <Parameter Name="textobuscar" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="speliminar_empleado">
+            <Parameter Name="idempleado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="speliminar_equipos">
+            <Parameter Name="idequipo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spequipo_tipo" ReturnType="Collection(String)" />
+          <FunctionImport Name="spinsertar_empleado">
+            <Parameter Name="idempleado" Mode="InOut" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="apellido" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="direccion" Mode="In" Type="String" />
+            <Parameter Name="dui" Mode="In" Type="String" />
+            <Parameter Name="nit" Mode="In" Type="String" />
+            <Parameter Name="id_cargo" Mode="In" Type="Int32" />
+            <Parameter Name="estado" Mode="In" Type="Int32" />
+            <Parameter Name="id_departamento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spinsertar_equipos">
+            <Parameter Name="idequipo" Mode="InOut" Type="Int32" />
+            <Parameter Name="idprogramacion" Mode="In" Type="Int32" />
+            <Parameter Name="idmarca" Mode="In" Type="Int32" />
+            <Parameter Name="idmodelo" Mode="In" Type="Int32" />
+            <Parameter Name="codigo" Mode="In" Type="String" />
+            <Parameter Name="precio" Mode="In" Type="Decimal" />
+            <Parameter Name="fecha_cad" Mode="In" Type="DateTime" />
+            <Parameter Name="tipo_equipo" Mode="In" Type="String" />
+            <Parameter Name="estado" Mode="In" Type="Int32" />
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+            <Parameter Name="fecha_modificacion" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spllenado_equipo" ReturnType="Collection(inventario2.spllenado_equipo_Result)" />
+          <FunctionImport Name="spllenar_encMovimiento" ReturnType="Collection(inventario2.spllenar_encMovimiento_Result)" />
+          <FunctionImport Name="spllenar_MostEmpleado" ReturnType="Collection(inventario2.spllenar_MostEmpleado_Result)" />
+          <FunctionImport Name="splogin" ReturnType="Collection(inventario2.splogin_Result)">
+            <Parameter Name="correo" Mode="In" Type="String" />
+            <Parameter Name="clave" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spmostrar_cargos" ReturnType="Collection(inventario2.spmostrar_cargos_Result)" />
+          <FunctionImport Name="spmostrar_departamentos" ReturnType="Collection(inventario2.spmostrar_departamentos_Result)" />
+          <FunctionImport Name="spmostrar_empleado" ReturnType="Collection(inventario2.spmostrar_empleado_Result)" />
+          <FunctionImport Name="spmostrar_marcas" ReturnType="Collection(inventario2.spmostrar_marcas_Result)" />
+          <FunctionImport Name="spmostrar_modelos" ReturnType="Collection(inventario2.spmostrar_modelos_Result)" />
+          <FunctionImport Name="spmostrar_modeloscb" ReturnType="Collection(inventario2.spmostrar_modeloscb_Result)">
+            <Parameter Name="id_marcas" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_BuscarEmpleado_Result">
+          <Property Type="Int32" Name="id_empleado" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="cargo" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_equipos_Result">
+          <Property Type="Int32" Name="id_equipo" Nullable="false" />
+          <Property Type="Int32" Name="id_programacion" Nullable="true" />
+          <Property Type="Int32" Name="cant_equipos" Nullable="true" />
+          <Property Type="Int32" Name="id_marca" Nullable="true" />
+          <Property Type="String" Name="marca" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="id_modelo" Nullable="true" />
+          <Property Type="String" Name="modelo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="codigo" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="precio_eq" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="fecha_cad" Nullable="true" />
+          <Property Type="String" Name="tipo_equipo" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="estado" Nullable="true" />
+          <Property Type="Int32" Name="id_usuario" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_modificacion" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_reportEquipo_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Tipo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="marca" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="modelo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="codigo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="encabezado" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Ubicacion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Fecha" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="sp_reportProgra_Result">
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+          <Property Type="String" Name="tipo_equipo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="codigo" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="precio_eq" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="marca" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FechaI" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="departamento" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FechaC" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="spbuscar_empleado_nombre_Result">
+          <Property Type="Int32" Name="id_empleado" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="apellido" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="telefono" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="direccion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="dui" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="nit" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="id_cargo" Nullable="true" />
+          <Property Type="String" Name="cargo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="estado" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spbuscar_equipo_tipo_Result">
+          <Property Type="Int32" Name="id_equipo" Nullable="false" />
+          <Property Type="Int32" Name="id_programacion" Nullable="true" />
+          <Property Type="Int32" Name="cant_equipos" Nullable="true" />
+          <Property Type="Int32" Name="id_marca" Nullable="true" />
+          <Property Type="String" Name="marca" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="id_modelo" Nullable="true" />
+          <Property Type="String" Name="modelo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="codigo" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="precio_eq" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="fecha_cad" Nullable="true" />
+          <Property Type="String" Name="tipo_equipo" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="estado" Nullable="true" />
+          <Property Type="Int32" Name="id_usuario" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_modificacion" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spllenado_equipo_Result">
+          <Property Type="Int32" Name="Id_Equipo" Nullable="false" />
+          <Property Type="String" Name="Equipo" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="codigo" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spllenar_encMovimiento_Result">
+          <Property Type="Int32" Name="id_encabezado" Nullable="false" />
+          <Property Type="String" Name="encabezado" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spllenar_MostEmpleado_Result">
+          <Property Type="Int32" Name="id_empleado" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="cargo" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="splogin_Result">
+          <Property Type="Int32" Name="id_usuario" Nullable="false" />
+          <Property Type="Int32" Name="id_empleado" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spmostrar_cargos_Result">
+          <Property Type="Int32" Name="id_cargo" Nullable="false" />
+          <Property Type="String" Name="cargo" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spmostrar_departamentos_Result">
+          <Property Type="Int32" Name="id_departamento" Nullable="false" />
+          <Property Type="String" Name="departamento" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spmostrar_empleado_Result">
+          <Property Type="Int32" Name="id_empleado" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="apellido" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="telefono" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="direccion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="dui" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="nit" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="id_cargo" Nullable="true" />
+          <Property Type="String" Name="cargo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="estado" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spmostrar_marcas_Result">
+          <Property Type="Int32" Name="id_marca" Nullable="false" />
+          <Property Type="String" Name="marca" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spmostrar_modelos_Result">
+          <Property Type="Int32" Name="id_modelo" Nullable="false" />
+          <Property Type="String" Name="modelo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="id_marca" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spmostrar_modeloscb_Result">
+          <Property Type="Int32" Name="id_modelo" Nullable="false" />
+          <Property Type="String" Name="modelo" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="inventario2StoreContainer" CdmEntityContainer="inventario2e">
+          <EntitySetMapping Name="cargos">
+            <EntityTypeMapping TypeName="inventario2.cargos">
+              <MappingFragment StoreEntitySet="cargos">
+                <ScalarProperty Name="id_cargo" ColumnName="id_cargo" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="departamentos">
+            <EntityTypeMapping TypeName="inventario2.departamentos">
+              <MappingFragment StoreEntitySet="departamentos">
+                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empleados">
+            <EntityTypeMapping TypeName="inventario2.empleados">
+              <MappingFragment StoreEntitySet="empleados">
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="dui" ColumnName="dui" />
+                <ScalarProperty Name="nit" ColumnName="nit" />
+                <ScalarProperty Name="id_cargo" ColumnName="id_cargo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="encabezado_movimientos">
+            <EntityTypeMapping TypeName="inventario2.encabezado_movimientos">
+              <MappingFragment StoreEntitySet="encabezado_movimientos">
+                <ScalarProperty Name="id_encabezado" ColumnName="id_encabezado" />
+                <ScalarProperty Name="encabezado" ColumnName="encabezado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipos">
+            <EntityTypeMapping TypeName="inventario2.equipos">
+              <MappingFragment StoreEntitySet="equipos">
+                <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
+                <ScalarProperty Name="id_programacion" ColumnName="id_programacion" />
+                <ScalarProperty Name="id_marca" ColumnName="id_marca" />
+                <ScalarProperty Name="id_modelo" ColumnName="id_modelo" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="precio_eq" ColumnName="precio_eq" />
+                <ScalarProperty Name="fecha_cad" ColumnName="fecha_cad" />
+                <ScalarProperty Name="tipo_equipo" ColumnName="tipo_equipo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="marcas">
+            <EntityTypeMapping TypeName="inventario2.marcas">
+              <MappingFragment StoreEntitySet="marcas">
+                <ScalarProperty Name="id_marca" ColumnName="id_marca" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="modelos">
+            <EntityTypeMapping TypeName="inventario2.modelos">
+              <MappingFragment StoreEntitySet="modelos">
+                <ScalarProperty Name="id_modelo" ColumnName="id_modelo" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="id_marca" ColumnName="id_marca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="movimientos_enquipos">
+            <EntityTypeMapping TypeName="inventario2.movimientos_enquipos">
+              <MappingFragment StoreEntitySet="movimientos_enquipos">
+                <ScalarProperty Name="id_mov" ColumnName="id_mov" />
+                <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+                <ScalarProperty Name="id_encabezado" ColumnName="id_encabezado" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="programacion">
+            <EntityTypeMapping TypeName="inventario2.programacion">
+              <MappingFragment StoreEntitySet="programacion">
+                <ScalarProperty Name="id_programacion" ColumnName="id_programacion" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="cant_equipos" ColumnName="cant_equipos" />
+                <ScalarProperty Name="gestion" ColumnName="gestion" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="inventario2.usuarios">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="inventario2.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="editar_empleado" FunctionName="inventario2.Store.editar_empleado" />
+          <FunctionImportMapping FunctionImportName="editar_equipos" FunctionName="inventario2.Store.editar_equipos" />
+          <FunctionImportMapping FunctionImportName="sp_AsignarEquipos" FunctionName="inventario2.Store.sp_AsignarEquipos" />
+          <FunctionImportMapping FunctionImportName="sp_BuscarEmpleado" FunctionName="inventario2.Store.sp_BuscarEmpleado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.sp_BuscarEmpleado_Result">
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_equipos" FunctionName="inventario2.Store.sp_mostrar_equipos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.sp_mostrar_equipos_Result">
+                <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
+                <ScalarProperty Name="id_programacion" ColumnName="id_programacion" />
+                <ScalarProperty Name="cant_equipos" ColumnName="cant_equipos" />
+                <ScalarProperty Name="id_marca" ColumnName="id_marca" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="id_modelo" ColumnName="id_modelo" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="precio_eq" ColumnName="precio_eq" />
+                <ScalarProperty Name="fecha_cad" ColumnName="fecha_cad" />
+                <ScalarProperty Name="tipo_equipo" ColumnName="tipo_equipo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_RecepcionMov" FunctionName="inventario2.Store.sp_RecepcionMov" />
+          <FunctionImportMapping FunctionImportName="sp_RecepcionMov2" FunctionName="inventario2.Store.sp_RecepcionMov2" />
+          <FunctionImportMapping FunctionImportName="sp_reportEquipo" FunctionName="inventario2.Store.sp_reportEquipo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.sp_reportEquipo_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="encabezado" ColumnName="encabezado" />
+                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_reportProgra" FunctionName="inventario2.Store.sp_reportProgra">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.sp_reportProgra_Result">
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="tipo_equipo" ColumnName="tipo_equipo" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="precio_eq" ColumnName="precio_eq" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="FechaI" ColumnName="FechaI" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+                <ScalarProperty Name="FechaC" ColumnName="FechaC" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spbuscar_empleado_nombre" FunctionName="inventario2.Store.spbuscar_empleado_nombre">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.spbuscar_empleado_nombre_Result">
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="dui" ColumnName="dui" />
+                <ScalarProperty Name="nit" ColumnName="nit" />
+                <ScalarProperty Name="id_cargo" ColumnName="id_cargo" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spbuscar_equipo_tipo" FunctionName="inventario2.Store.spbuscar_equipo_tipo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.spbuscar_equipo_tipo_Result">
+                <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
+                <ScalarProperty Name="id_programacion" ColumnName="id_programacion" />
+                <ScalarProperty Name="cant_equipos" ColumnName="cant_equipos" />
+                <ScalarProperty Name="id_marca" ColumnName="id_marca" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="id_modelo" ColumnName="id_modelo" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="precio_eq" ColumnName="precio_eq" />
+                <ScalarProperty Name="fecha_cad" ColumnName="fecha_cad" />
+                <ScalarProperty Name="tipo_equipo" ColumnName="tipo_equipo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="speliminar_empleado" FunctionName="inventario2.Store.speliminar_empleado" />
+          <FunctionImportMapping FunctionImportName="speliminar_equipos" FunctionName="inventario2.Store.speliminar_equipos" />
+          <FunctionImportMapping FunctionImportName="spequipo_tipo" FunctionName="inventario2.Store.spequipo_tipo" />
+          <FunctionImportMapping FunctionImportName="spinsertar_empleado" FunctionName="inventario2.Store.spinsertar_empleado" />
+          <FunctionImportMapping FunctionImportName="spinsertar_equipos" FunctionName="inventario2.Store.spinsertar_equipos" />
+          <FunctionImportMapping FunctionImportName="spllenado_equipo" FunctionName="inventario2.Store.spllenado_equipo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.spllenado_equipo_Result">
+                <ScalarProperty Name="Id_Equipo" ColumnName="Id Equipo" />
+                <ScalarProperty Name="Equipo" ColumnName="Equipo" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spllenar_encMovimiento" FunctionName="inventario2.Store.spllenar_encMovimiento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.spllenar_encMovimiento_Result">
+                <ScalarProperty Name="id_encabezado" ColumnName="id_encabezado" />
+                <ScalarProperty Name="encabezado" ColumnName="encabezado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spllenar_MostEmpleado" FunctionName="inventario2.Store.spllenar_MostEmpleado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.spllenar_MostEmpleado_Result">
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="splogin" FunctionName="inventario2.Store.splogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.splogin_Result">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spmostrar_cargos" FunctionName="inventario2.Store.spmostrar_cargos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.spmostrar_cargos_Result">
+                <ScalarProperty Name="id_cargo" ColumnName="id_cargo" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spmostrar_departamentos" FunctionName="inventario2.Store.spmostrar_departamentos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.spmostrar_departamentos_Result">
+                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spmostrar_empleado" FunctionName="inventario2.Store.spmostrar_empleado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.spmostrar_empleado_Result">
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="dui" ColumnName="dui" />
+                <ScalarProperty Name="nit" ColumnName="nit" />
+                <ScalarProperty Name="id_cargo" ColumnName="id_cargo" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spmostrar_marcas" FunctionName="inventario2.Store.spmostrar_marcas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.spmostrar_marcas_Result">
+                <ScalarProperty Name="id_marca" ColumnName="id_marca" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spmostrar_modelos" FunctionName="inventario2.Store.spmostrar_modelos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.spmostrar_modelos_Result">
+                <ScalarProperty Name="id_modelo" ColumnName="id_modelo" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="id_marca" ColumnName="id_marca" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spmostrar_modeloscb" FunctionName="inventario2.Store.spmostrar_modeloscb">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="inventario2.spmostrar_modeloscb_Result">
+                <ScalarProperty Name="id_modelo" ColumnName="id_modelo" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

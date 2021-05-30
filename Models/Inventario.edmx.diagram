@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="56cc473e54714fc397dc129d3a465129" Name="Diagram1">
+        <EntityTypeShape EntityType="inventario2.cargos" Width="1.5" PointX="1.5" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="inventario2.departamentos" Width="1.5" PointX="1.5" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="inventario2.empleados" Width="1.5" PointX="1.5" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="inventario2.encabezado_movimientos" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="inventario2.equipos" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="inventario2.marcas" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="inventario2.modelos" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="inventario2.movimientos_enquipos" Width="1.5" PointX="7.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="inventario2.programacion" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="inventario2.usuarios" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="inventario2.database_firewall_rules" Width="1.5" PointX="7.75" PointY="2.875" IsExpanded="true" />
+        <AssociationConnector Association="inventario2.fk_cargos" ManuallyRouted="false" />
+        <AssociationConnector Association="inventario2.fk_depa" ManuallyRouted="false" />
+        <AssociationConnector Association="inventario2.fk_departamento" ManuallyRouted="false" />
+        <AssociationConnector Association="inventario2.fk_empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="inventario2.fk_empleados" ManuallyRouted="false" />
+        <AssociationConnector Association="inventario2.fk_encabezado_movimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="inventario2.fk_equipos" ManuallyRouted="false" />
+        <AssociationConnector Association="inventario2.fk_marca" ManuallyRouted="false" />
+        <AssociationConnector Association="inventario2.fk_modelos" ManuallyRouted="false" />
+        <AssociationConnector Association="inventario2.fk_programacion" ManuallyRouted="false" />
+        <AssociationConnector Association="inventario2.fk_usuarios2" ManuallyRouted="false" />
+        <AssociationConnector Association="inventario2.fk_marcas" ManuallyRouted="false" />
+        <AssociationConnector Association="inventario2.fk_usuario1" ManuallyRouted="false" />
+        <AssociationConnector Association="inventario2.fk_usuarios3" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
