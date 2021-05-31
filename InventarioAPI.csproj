@@ -104,11 +104,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\EquiposController.cs" />
     <Compile Include="Controllers\ReportesEquipoController.cs" />
     <Compile Include="Controllers\ReporteEmpleadoController.cs" />
     <Compile Include="Controllers\ReporteLoteController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\UsuariosFilterController.cs" />
     <Compile Include="Diseño\ReportesEmpleados.cs" />
     <Compile Include="Diseño\ReportesEquiposVM.cs" />
     <Compile Include="Global.asax.cs">

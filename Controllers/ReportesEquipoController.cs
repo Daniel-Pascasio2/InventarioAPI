@@ -51,7 +51,7 @@ namespace InventarioAPI.Controllers
             }
             return Ok(lst);
         }
-        /*
+        
         [HttpGet]
         [Route("api/ReporteEquipo/xtipo/{tipo}")]
         public IHttpActionResult GetReporteEquipoTipo(string tipo)
@@ -138,7 +138,7 @@ namespace InventarioAPI.Controllers
         }
         //Tipo, Ubicacion, precio, marca, codigo, fecha ingreso, departamento, cantidada
         [HttpGet]
-        [Route("api/ReporteEquipoK/{tipo}/{Ubicacion}")]
+        [Route("api/ReporteEquipoK/{tipo}/{ubicacion}")]
         public IHttpActionResult GetEquipoD(string tipo, string ubicacion)
         {
             List<data> l = new List<data>();
@@ -175,7 +175,7 @@ namespace InventarioAPI.Controllers
             return Ok(l);
         }
 
-        /*
+        
         [HttpGet]
         [Route("api/ReporteEquipo/xdepa/{depa}")]
         public IHttpActionResult GetReporteEquipoDepa(string depa)
@@ -206,7 +206,7 @@ namespace InventarioAPI.Controllers
         }
         //Filtra por Tipo Equipo y Departamento
         [HttpGet]
-        [Route("api/ReporteEquipo/xtipodepa/{tipo}{depa}")]
+        [Route("api/ReporteEquipo/xtipodepa/{tipo}/{depa}")]
         public IHttpActionResult GetReporteEquipoxTipoDepa(string tipo,string depa)
         {
 
@@ -233,6 +233,6 @@ namespace InventarioAPI.Controllers
                        }).ToList();
             }
             return Ok(lst);
-        }*/
+        }
     }
 }
