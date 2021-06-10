@@ -28,25 +28,30 @@ namespace InventarioAPI.Controllers
         public IHttpActionResult GetReporteEquipo()
         {
 
-            List<Diseño.ReportesEquiposVM> lst = new List<Diseño.ReportesEquiposVM>();
+            List<data> lst = new List<data>();
 
             using (Models.inventario2e db = new Models.inventario2e())
             {
 
-                lst = (from equipos in db.equipos
-                       join marcas in db.marcas on equipos.id_marca equals marcas.id_marca
+                lst = (from marcar in db.marcas
+                       join equipos in db.equipos on marcar.id_marca equals equipos.id_marca
                        join modelos in db.modelos on equipos.id_modelo equals modelos.id_modelo
-                       join movimientos in db.movimientos_enquipos on equipos.id_equipo equals movimientos.id_equipo
-                       join empleados in db.empleados on movimientos.id_empleado equals empleados.id_empleado
+                       join movimientos in db.movimientos_enquipos on
+                       equipos.id_equipo equals movimientos.id_equipo
+                       join encabezado in db.encabezado_movimientos on movimientos.id_encabezado equals encabezado.id_encabezado
                        join departamentos in db.departamentos on movimientos.id_departamento equals departamentos.id_departamento
 
-                       select new Diseño.ReportesEquiposVM
+                       select new data
                        {
-                           Id_eq = equipos.id_equipo,
-                           Equipo = marcas.marca + " " + modelos.modelo,
-                           Serie = equipos.codigo,
-                           Departamento = departamentos.departamento,
-                           Estado = (int)movimientos.estado
+                           ID = movimientos.id_mov,
+                           Tipo = equipos.tipo_equipo,
+                           marca = marcar.marca,
+                           modelo = modelos.modelo,
+                           codigo = equipos.codigo,
+                           encabezado = encabezado.encabezado,
+                           Ubicacion = departamentos.departamento,
+                           Fecha = (DateTime)movimientos.fecha,
+                           Estado = (int)equipos.estado
                        }).ToList();
             }
             return Ok(lst);
@@ -136,70 +141,36 @@ namespace InventarioAPI.Controllers
             return Ok(lst);
 
         }
-        //Tipo, Ubicacion, precio, marca, codigo, fecha ingreso, departamento, cantidada
-        [HttpGet]
-        [Route("api/ReporteEquipoK/{tipo}/{ubicacion}")]
-        public IHttpActionResult GetEquipoD(string tipo, string ubicacion)
-        {
-            List<data> l = new List<data>();
-
-            using (Models.inventario2e db = new Models.inventario2e())
-            {
-                try
-                {
-                    l = (
-                        from marcar in db.marcas
-                        join equipos in db.equipos on marcar.id_marca equals equipos.id_marca
-                        join modelos in db.modelos on equipos.id_modelo equals modelos.id_modelo
-                        join movimientos in db.movimientos_enquipos on
-                        equipos.id_equipo equals movimientos.id_equipo
-                        join encabezado in db.encabezado_movimientos on movimientos.id_encabezado equals encabezado.id_encabezado
-                        join departamentos in db.departamentos on movimientos.id_departamento equals departamentos.id_departamento
-
-                        where equipos.tipo_equipo == tipo && departamentos.departamento == ubicacion
-                        select new data
-                        {
-                            ID = movimientos.id_mov,
-                            Tipo = equipos.tipo_equipo,
-                            marca = marcar.marca,
-                            modelo = modelos.modelo,
-                            codigo = equipos.codigo,
-                            encabezado = encabezado.encabezado,
-                            Ubicacion = departamentos.departamento,
-                            Fecha = (DateTime)movimientos.fecha,
-                            Estado = (int)equipos.estado
-                        }).ToList();
-                }
-                catch (Exception e) { Console.WriteLine(e.ToString()); }
-            }
-            return Ok(l);
-        }
-
         
         [HttpGet]
         [Route("api/ReporteEquipo/xdepa/{depa}")]
         public IHttpActionResult GetReporteEquipoDepa(string depa)
         {
 
-            List<Diseño.ReportesEquiposVM> lst = new List<Diseño.ReportesEquiposVM>();
+            List<data> lst = new List<data>();
 
             using (Models.inventario2e db = new Models.inventario2e())
             {
 
-                lst = (from equipos in db.equipos
-                       join marcas in db.marcas on equipos.id_marca equals marcas.id_marca
+                lst = (from marcar in db.marcas
+                       join equipos in db.equipos on marcar.id_marca equals equipos.id_marca
                        join modelos in db.modelos on equipos.id_modelo equals modelos.id_modelo
-                       join movimientos in db.movimientos_enquipos on equipos.id_equipo equals movimientos.id_equipo
-                       join empleados in db.empleados on movimientos.id_empleado equals empleados.id_empleado
+                       join movimientos in db.movimientos_enquipos on
+                       equipos.id_equipo equals movimientos.id_equipo
+                       join encabezado in db.encabezado_movimientos on movimientos.id_encabezado equals encabezado.id_encabezado
                        join departamentos in db.departamentos on movimientos.id_departamento equals departamentos.id_departamento
                        where departamentos.departamento == depa
-                       select new Diseño.ReportesEquiposVM
+                       select new data
                        {
-                           Id_eq = equipos.id_equipo,
-                           Equipo = marcas.marca + " " + modelos.modelo,
-                           Serie = equipos.codigo,
-                           Departamento = departamentos.departamento,
-                           Estado = (int)movimientos.estado
+                           ID = movimientos.id_mov,
+                           Tipo = equipos.tipo_equipo,
+                           marca = marcar.marca,
+                           modelo = modelos.modelo,
+                           codigo = equipos.codigo,
+                           encabezado = encabezado.encabezado,
+                           Ubicacion = departamentos.departamento,
+                           Fecha = (DateTime)movimientos.fecha,
+                           Estado = (int)equipos.estado
                        }).ToList();
             }
             return Ok(lst);
@@ -210,26 +181,31 @@ namespace InventarioAPI.Controllers
         public IHttpActionResult GetReporteEquipoxTipoDepa(string tipo,string depa)
         {
 
-            List<Diseño.ReportesEquiposVM> lst = new List<Diseño.ReportesEquiposVM>();
+            List<data> lst = new List<data>();
 
             using (Models.inventario2e db = new Models.inventario2e())
             {
 
-                lst = (from equipos in db.equipos
-                       join marcas in db.marcas on equipos.id_marca equals marcas.id_marca
+                lst = (from marcar in db.marcas
+                       join equipos in db.equipos on marcar.id_marca equals equipos.id_marca
                        join modelos in db.modelos on equipos.id_modelo equals modelos.id_modelo
-                       join movimientos in db.movimientos_enquipos on equipos.id_equipo equals movimientos.id_equipo
-                       join empleados in db.empleados on movimientos.id_empleado equals empleados.id_empleado
+                       join movimientos in db.movimientos_enquipos on
+                       equipos.id_equipo equals movimientos.id_equipo
+                       join encabezado in db.encabezado_movimientos on movimientos.id_encabezado equals encabezado.id_encabezado
                        join departamentos in db.departamentos on movimientos.id_departamento equals departamentos.id_departamento
                        where equipos.tipo_equipo==tipo && departamentos.departamento==depa
 
-                       select new Diseño.ReportesEquiposVM
+                       select new data
                        {
-                           Id_eq = equipos.id_equipo,
-                           Equipo = marcas.marca + " " + modelos.modelo,
-                           Serie = equipos.codigo,
-                           Departamento = departamentos.departamento,
-                           Estado = (int)movimientos.estado
+                           ID = movimientos.id_mov,
+                           Tipo = equipos.tipo_equipo,
+                           marca = marcar.marca,
+                           modelo = modelos.modelo,
+                           codigo = equipos.codigo,
+                           encabezado = encabezado.encabezado,
+                           Ubicacion = departamentos.departamento,
+                           Fecha = (DateTime)movimientos.fecha,
+                           Estado = (int)equipos.estado
                        }).ToList();
             }
             return Ok(lst);
